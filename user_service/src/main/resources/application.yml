@@ -1,0 +1,16 @@
+#PostgreSql
+spring:
+  datasource:
+    url: jdbc:postgresql://192.168.1.11:5432/user_service
+    username: postgres
+    password: 123546
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+#Server port
+server:
+  port: 8001
