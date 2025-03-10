@@ -29,10 +29,10 @@ public class Users {
     @Column(name = "ID")
     private Long userId;
 
-    @Column(name = "FIRST_DATE")
+    @Column(name = "FIRST_NAME")
     private String firstName;
 
-    @Column(name = "LAST_DATE")
+    @Column(name = "LAST_NAME")
     private String lastName;
 
     @Column(name = "EMAIL")
@@ -41,14 +41,14 @@ public class Users {
     @Column(name = "PHONE")
     private String phone;
 
-    @Column(name = "ACTIVATED", columnDefinition = "NUMERIC(1)")
-    private Boolean isActive;
+    @Column(name = "ACTIVATED")
+    private Integer isActive;
 
     @Column(name = "ROLES")
     private String roles;
 
-    @Column(name = "VERIFIED", columnDefinition = "NUMERIC(1)")
-    private Boolean isVerify;
+    @Column(name = "VERIFIED")
+    private Integer isVerify;
 
     @Column(name = "CREATED_DATE")
     private Date createdDate;
