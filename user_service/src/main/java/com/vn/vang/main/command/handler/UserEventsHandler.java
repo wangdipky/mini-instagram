@@ -1,6 +1,8 @@
 package com.vn.vang.main.command.handler;
 
 import com.vn.vang.main.command.event.UserCreatedEvent;
+import com.vn.vang.main.command.event.UserDeletedEvent;
+import com.vn.vang.main.command.event.UserUpdatedEvent;
 import com.vn.vang.main.entities.Users;
 import com.vn.vang.main.repository.UserRepository;
 import org.axonframework.eventhandling.EventHandler;
@@ -33,5 +35,19 @@ public class UserEventsHandler {
         Users users = new Users();
         BeanUtils.copyProperties(event, users);
         userRepository.save(users);
+    }
+
+    @EventHandler
+    public void handle(UserUpdatedEvent event) {
+
+        Users users = new Users();
+        BeanUtils.copyProperties(event, users);
+        userRepository.save(users);
+    }
+
+    @EventHandler
+    public void handle(UserDeletedEvent event) {
+
+        userRepository.deleteById(event.getUserId());
     }
 }

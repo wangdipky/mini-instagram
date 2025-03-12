@@ -1,0 +1,28 @@
+#PostgreSql
+spring:
+  datasource:
+    url: jdbc:postgresql://${IP_LOCAL}:5432/user_service
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  application:
+    name: user_service
+#Server port
+server:
+  port: 8001
+#Eureka
+eureka:
+  client:
+    service-url:
+      defaultZone:
+        - http://${IP_LOCAL}:8761/eureka
+#Axon
+axon:
+  axonserver:
+    servers: ${IP_LOCAL}:8124

@@ -1,6 +1,8 @@
 package com.vn.vang.main.command.service.impl;
 
 import com.vn.vang.main.command.command.CreateUserCommand;
+import com.vn.vang.main.command.command.DeleteUserCommand;
+import com.vn.vang.main.command.command.UpdateUserCommand;
 import com.vn.vang.main.command.model.UserRequestModel;
 import com.vn.vang.main.command.service.IUserCommandService;
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -36,4 +38,24 @@ public class UserCommandServiceImpl implements IUserCommandService {
         commandGateway.sendAndWait(createUserCommand);
         return requestModel;
     }
+
+    @Override
+    public UserRequestModel updateUser(UserRequestModel user) {
+
+        UpdateUserCommand updateUserCommand  = new UpdateUserCommand();
+        BeanUtils.copyProperties(user, updateUserCommand);
+        updateUserCommand.setUpdatedDate(new Date());
+        commandGateway.sendAndWait(updateUserCommand);
+        return user;
+    }
+
+    @Override
+    public Long deleteUser(Long id) {
+
+        DeleteUserCommand deleteUserCommand = new DeleteUserCommand();
+        deleteUserCommand.setUserId(id);
+        commandGateway.sendAndWait(deleteUserCommand);
+        return id;
+    }
+
 }

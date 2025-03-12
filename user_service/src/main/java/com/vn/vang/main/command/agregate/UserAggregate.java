@@ -1,7 +1,11 @@
 package com.vn.vang.main.command.agregate;
 
 import com.vn.vang.main.command.command.CreateUserCommand;
+import com.vn.vang.main.command.command.DeleteUserCommand;
+import com.vn.vang.main.command.command.UpdateUserCommand;
 import com.vn.vang.main.command.event.UserCreatedEvent;
+import com.vn.vang.main.command.event.UserDeletedEvent;
+import com.vn.vang.main.command.event.UserUpdatedEvent;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -60,6 +64,20 @@ public class UserAggregate {
         AggregateLifecycle.apply(event);
     }
 
+    @CommandHandler
+    public UserAggregate(UpdateUserCommand command) {
+        UserCreatedEvent event = new UserCreatedEvent();
+        BeanUtils.copyProperties(command, event);
+        AggregateLifecycle.apply(event);
+    }
+
+    @CommandHandler
+    public UserAggregate(DeleteUserCommand command) {
+        UserDeletedEvent event = new UserDeletedEvent();
+        BeanUtils.copyProperties(command, event);
+        AggregateLifecycle.apply(event);
+    }
+
     @EventSourcingHandler
     public void handle(UserCreatedEvent event) {
 
@@ -76,4 +94,29 @@ public class UserAggregate {
         this.updatedDate = event.getUpdatedDate();
         this.deletedDate = event.getDeletedDate();
     }
+
+    @EventSourcingHandler
+    public void handle(UserUpdatedEvent event) {
+
+        this.aggId = event.getAggId();
+        this.userId = event.getUserId();
+        this.firstName = event.getFirstName();
+        this.lastName = event.getLastName();
+        this.email = event.getEmail();
+        this.phone = event.getPhone();
+        this.isActive = event.getIsActive();
+        this.roles = event.getRoles();
+        this.isVerify = event.getIsVerify();
+        this.createdDate = event.getCreatedDate();
+        this.updatedDate = event.getUpdatedDate();
+        this.deletedDate = event.getDeletedDate();
+    }
+
+    @EventSourcingHandler
+    public void handle(UserDeletedEvent event) {
+
+        this.aggId = event.getAggId();
+        this.userId = event.getUserId();
+    }
+
 }

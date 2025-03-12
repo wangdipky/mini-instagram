@@ -12,4 +12,8 @@ import com.vn.vang.main.command.model.UserRequestModel;
 public interface IUserCommandService {
 
     public UserRequestModel addUser(UserRequestModel user);
+
+    public UserRequestModel updateUser(UserRequestModel user);
+
+    public Long deleteUser(Long id);
 }
